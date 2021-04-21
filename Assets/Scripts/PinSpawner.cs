@@ -8,16 +8,23 @@ using Mapbox.Unity.Map;
 namespace Geoduck
 {
     [RequireComponent(typeof(AbstractMap))]
-    public class PinSpawner : MonoBehaviour
+    public class PinSpawner : MonoSingleton<PinSpawner>
     {
         [SerializeField] private GameObject pinPrefab;
-        private List<GameObject> _spawnedPins;
+        private List<GameObject> _spawnedPins = new List<GameObject>();
         private Vector2d[] _coordinates;
         private AbstractMap _map;
 
         void Start()
         {
             _map = GetComponent<AbstractMap>();
+            RefreshPins();
+        }
+
+        public void RefreshPins()
+        {
+            foreach (var pin in _spawnedPins)
+                Destroy(pin);
             StartCoroutine(SpawnPins());
         }
 
