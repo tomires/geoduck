@@ -30,6 +30,7 @@ namespace Geoduck
 
         private IEnumerator SpawnPins()
         {
+            Directory.CreateDirectory(Constants.cacheDirectory);
             var gpxList = Directory.GetFiles(Constants.cacheDirectory);
             _spawnedPins = new List<GameObject>();
             _coordinates = new Vector2d[gpxList.Length];
