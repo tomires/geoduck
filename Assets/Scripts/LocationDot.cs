@@ -11,6 +11,7 @@ namespace Geoduck
     {
         [SerializeField] private AbstractMap _map;
         private Renderer _renderer;
+        private Vector2d _currentLocation;
 
         IEnumerator Start()
         {
@@ -18,10 +19,9 @@ namespace Geoduck
             _renderer.enabled = false;
 
             Input.location.Start();
+
             while (Input.location.status == LocationServiceStatus.Initializing)
-            {
                 yield return new WaitForSeconds(1f);
-            }
 
             if (Input.location.status == LocationServiceStatus.Running)
             {
@@ -31,14 +31,17 @@ namespace Geoduck
             }
         }
 
+        void Update()
+        {
+            transform.position = _map.GeoToWorldPosition(_currentLocation);
+        }
+
         private IEnumerator UpdateLocation()
         {
             while(true)
             {
                 if(Input.location.status == LocationServiceStatus.Running)
-                {
-                    transform.position = _map.GeoToWorldPosition(GetLocation());
-                }
+                    _currentLocation = GetLocation();
                 yield return new WaitForSeconds(Constants.locationUpdateFrequency);
             }
         }
