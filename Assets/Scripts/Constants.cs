@@ -18,5 +18,7 @@ namespace Geoduck
             public const string mystery = "Unknown Cache";
             public const string multi = "Multi-cache";
         }
+
+        public static readonly float locationUpdateFrequency = 3f;
     }
 }
