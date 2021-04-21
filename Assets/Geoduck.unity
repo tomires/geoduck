@@ -932,6 +932,8 @@ GameObject:
   - component: {fileID: 1102290165}
   - component: {fileID: 1102290164}
   - component: {fileID: 1102290163}
+  - component: {fileID: 1102290167}
+  - component: {fileID: 1102290168}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1091,6 +1093,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1102290167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102290162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8516ddc963073148ab58b50dc004e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1102290168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102290162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2895dc5c9142fa4eaf8b14ec769ed79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traditional: {fileID: 2100000, guid: 1fff361f9a0aa5f46aa4f55c1a35f786, type: 2}
+  selected: {fileID: 2100000, guid: a68559f71f88c7e46bf90fc702b7875c, type: 2}
 --- !u!28 &1236922280
 Texture2D:
   m_ObjectHideFlags: 0
@@ -1296,8 +1324,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702920507}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &1702920512

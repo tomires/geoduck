@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Geoduck.UI
+namespace Geoduck
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class CacheDetails : MonoSingleton<CacheDetails>
+    public class CacheDetailsPanel : MonoSingleton<CacheDetailsPanel>
     {
         [SerializeField] private Text cacheName;
         [SerializeField] private Text hint;
@@ -14,7 +14,7 @@ namespace Geoduck.UI
         [SerializeField] private Sprite micro, small, regular, large, other;
         private CanvasGroup _panel;
 
-        private void Awake()
+        void Start()
         {
             _panel = GetComponent<CanvasGroup>();
         }

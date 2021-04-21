@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Geoduck.UI
+namespace Geoduck
 {
     [RequireComponent(typeof(Button))]
     public class LoadButton : MonoBehaviour

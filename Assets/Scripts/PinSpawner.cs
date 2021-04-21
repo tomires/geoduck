@@ -41,6 +41,7 @@ namespace Geoduck
                 _coordinates[i] = new Vector2d(double.Parse(gpx.wpt.lat), double.Parse(gpx.wpt.lon));
                 var pin = Instantiate(pinPrefab);
                 pin.transform.localPosition = _map.GeoToWorldPosition(_coordinates[i], true);
+                pin.GetComponent<Pin>().Gpx = gpx;
                 _spawnedPins.Add(pin);
                 yield return null;
                 i++;
