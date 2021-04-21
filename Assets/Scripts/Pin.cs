@@ -27,7 +27,13 @@ namespace Geoduck
         {
             _renderer.material = selected
                 ? MaterialLibrary.Instance.selected
-                : MaterialLibrary.Instance.traditional;
+                : _gpx.wpt.details.type switch
+                {
+                    Constants.CacheTypes.traditional => MaterialLibrary.Instance.traditional,
+                    Constants.CacheTypes.multi => MaterialLibrary.Instance.multi,
+                    Constants.CacheTypes.mystery => MaterialLibrary.Instance.mystery,
+                    _ => MaterialLibrary.Instance.mystery
+                };
         }
     }
 }

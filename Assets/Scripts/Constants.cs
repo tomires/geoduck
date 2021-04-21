@@ -11,5 +11,12 @@ namespace Geoduck
         public static readonly string cacheDirectory = $"{Application.persistentDataPath}/caches";
         public static readonly string tempDirectory = $"{Application.persistentDataPath}/temp";
         public static string CacheFile(string gcCode) => string.Format(cacheDirectory + "/{0}.gpx", gcCode);
+
+        public static class CacheTypes
+        {
+            public const string traditional = "Traditional Cache";
+            public const string mystery = "Unknown Cache";
+            public const string multi = "Multi-cache";
+        }
     }
 }

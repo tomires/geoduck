@@ -1118,6 +1118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   traditional: {fileID: 2100000, guid: 1fff361f9a0aa5f46aa4f55c1a35f786, type: 2}
+  multi: {fileID: 2100000, guid: acd15965d3459624483f849f7967991b, type: 2}
+  mystery: {fileID: 2100000, guid: 6ddb655ee9f2ec846b908f20bade9146, type: 2}
   selected: {fileID: 2100000, guid: a68559f71f88c7e46bf90fc702b7875c, type: 2}
 --- !u!28 &1236922280
 Texture2D:
