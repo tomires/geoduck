@@ -25,7 +25,7 @@ namespace Geoduck
             if (Input.location.status == LocationServiceStatus.Running)
             {
                 _renderer.enabled = true;
-                _map.SetCenterLatitudeLongitude(GetLocation());
+                CenterMapOnLocation();
                 StartCoroutine(UpdateLocation());
             }
         }
@@ -33,6 +33,11 @@ namespace Geoduck
         void Update()
         {
             transform.position = _map.GeoToWorldPosition(CurrentLocation);
+        }
+
+        public void CenterMapOnLocation()
+        {
+            _map.SetCenterLatitudeLongitude(GetLocation());
         }
 
         private IEnumerator UpdateLocation()

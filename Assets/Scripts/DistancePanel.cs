@@ -5,15 +5,20 @@ using UnityEngine.UI;
 namespace Geoduck
 {
     [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(Button))]
     public class DistancePanel : MonoSingleton<DistancePanel>
     {
         [SerializeField] Text distanceText;
         private CanvasGroup _panel;
+        private Button _button;
 
         void Start()
         {
-            StartCoroutine(UpdateDistance());
             _panel = GetComponent<CanvasGroup>();
+            _button = GetComponent<Button>();
+
+            StartCoroutine(UpdateDistance());
+            _button.onClick.AddListener(() => LocationDot.Instance.CenterMapOnLocation());
         }
 
         private IEnumerator UpdateDistance()
