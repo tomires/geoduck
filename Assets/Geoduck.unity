@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 1102290166}
   - component: {fileID: 1102290165}
   - component: {fileID: 1102290164}
+  - component: {fileID: 1102290163}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -938,6 +939,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1102290163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102290162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d4a5bc6dbc0dc41a68e5a8131afdd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pinPrefab: {fileID: 7060495289144568334, guid: dcbe0c87ede6d98478d5cd64488b56bc, type: 3}
 --- !u!114 &1102290164
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Geoduck
 {
-    public static class GpxLoader
+    public static class GpxImporter
     {
         private static string ZipFiletype => NativeFilePicker.ConvertExtensionToFileType("zip");
         private static string GpxFiletype => NativeFilePicker.ConvertExtensionToFileType("gpx");
@@ -37,10 +37,7 @@ namespace Geoduck
 
         private static string GetCacheCode(string path)
         {
-            var serializer = new XmlSerializer(typeof(GpxStructure));
-            var reader = new StreamReader(path);
-            var gpx = serializer.Deserialize(reader) as GpxStructure;
-            reader.Close();
+            var gpx = Utils.LoadGpxByPath(path);
             return gpx.wpt.code;
         }
     }

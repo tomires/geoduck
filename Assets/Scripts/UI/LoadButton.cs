@@ -13,7 +13,7 @@ namespace Geoduck.UI
 
         public void Load()
         {
-            GpxLoader.LoadGpx();
+            GpxImporter.LoadGpx();
         }
     }
 }
