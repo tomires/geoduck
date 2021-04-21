@@ -1,3 +1,4 @@
+using Mapbox.Utils;
 using System;
 using System.Xml;
 using System.Xml.Serialization;
@@ -7,6 +8,10 @@ namespace Geoduck
     [XmlRoot("gpx", Namespace = Constants.xmlRootNamespace)]
     public class GpxStructure
     {
+        public Vector2d Coordinates
+        {
+            get => new Vector2d(double.Parse(wpt.lat), double.Parse(wpt.lon));
+        }
         public Waypoint wpt;
     }
 

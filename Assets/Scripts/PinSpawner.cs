@@ -39,7 +39,7 @@ namespace Geoduck
             foreach(var path in gpxList)
             {
                 var gpx = Utils.LoadGpxByPath(path);
-                _coordinates[i] = new Vector2d(double.Parse(gpx.wpt.lat), double.Parse(gpx.wpt.lon));
+                _coordinates[i] = gpx.Coordinates;
                 var pin = Instantiate(pinPrefab);
                 pin.transform.localPosition = _map.GeoToWorldPosition(_coordinates[i], true);
                 pin.GetComponent<Pin>().Gpx = gpx;

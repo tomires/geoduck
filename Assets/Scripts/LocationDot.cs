@@ -1,7 +1,6 @@
 using Mapbox.Unity.Map;
 using Mapbox.Utils;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Geoduck
@@ -9,9 +8,9 @@ namespace Geoduck
     [RequireComponent(typeof(Renderer))]
     public class LocationDot : MonoSingleton<LocationDot>
     {
+        public Vector2d CurrentLocation { get; private set; }
         [SerializeField] private AbstractMap _map;
         private Renderer _renderer;
-        private Vector2d _currentLocation;
 
         IEnumerator Start()
         {
@@ -33,7 +32,7 @@ namespace Geoduck
 
         void Update()
         {
-            transform.position = _map.GeoToWorldPosition(_currentLocation);
+            transform.position = _map.GeoToWorldPosition(CurrentLocation);
         }
 
         private IEnumerator UpdateLocation()
@@ -41,7 +40,7 @@ namespace Geoduck
             while(true)
             {
                 if(Input.location.status == LocationServiceStatus.Running)
-                    _currentLocation = GetLocation();
+                    CurrentLocation = GetLocation();
                 yield return new WaitForSeconds(Constants.locationUpdateFrequency);
             }
         }
