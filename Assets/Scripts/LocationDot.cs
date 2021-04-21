@@ -38,6 +38,7 @@ namespace Geoduck
         public void CenterMapOnLocation()
         {
             _map.SetCenterLatitudeLongitude(GetLocation());
+            _map.UpdateMap();
         }
 
         private IEnumerator UpdateLocation()
