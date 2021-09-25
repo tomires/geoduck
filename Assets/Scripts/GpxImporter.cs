@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using System.IO.Compression;
 
 namespace Geoduck
 {
@@ -26,7 +27,7 @@ namespace Geoduck
             if(isArchive)
             {
                 Directory.CreateDirectory(Constants.tempDirectory);
-                ZipUtil.Unzip(path, Constants.tempDirectory);
+                ZipFile.ExtractToDirectory(path, Constants.tempDirectory);
                 var files = Directory.GetFiles(Constants.tempDirectory).ToList();
                 _filesLeftToProcess = files.Count;
                 files.ForEach(ProcessFile);
