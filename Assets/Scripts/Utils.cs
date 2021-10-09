@@ -1,7 +1,9 @@
 using Mapbox.Utils;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Geoduck
 {
@@ -50,6 +52,16 @@ namespace Geoduck
                 return $"{(distance / 1000f).ToString("0.0")}km";
             else /* -> 500m */
                 return $"{(int)distance}m";
+        }
+
+        public static bool IsMouseOverGUI()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            if (results.Count == 0) return false;
+            return results[0].gameObject.GetComponent<CanvasRenderer>() != null;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Geoduck
             public const string multi = "Multi-cache";
         }
 
-        public static readonly float locationUpdateFrequency = 3f;
+        public static readonly float locationUpdateFrequency = 1f;
+        public static readonly float cacheDetailsExpandedHeight = 500f;
     }
 }

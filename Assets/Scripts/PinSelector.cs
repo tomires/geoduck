@@ -9,11 +9,14 @@ namespace Geoduck
 
         void Update()
         {
-            if (Input.GetMouseButtonDown(0) || Input.touchCount == 1)
+            if (Input.GetMouseButtonDown(0)
+                || (Input.touchCount == 1 && Input.touches[0].phase == TouchPhase.Began))
             {
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, int.MaxValue, LayerMask.GetMask("Pin")))
+
+                if (!Utils.IsMouseOverGUI()
+                    && Physics.Raycast(ray, out hit, int.MaxValue, LayerMask.GetMask("Pin")))
                 {
                     SelectedPin = hit.transform.GetComponent<Pin>();
                     CacheDetailsPanel.Instance.ShowCacheDetails(SelectedPin.Gpx);
