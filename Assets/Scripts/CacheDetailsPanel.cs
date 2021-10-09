@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,28 +15,30 @@ namespace Geoduck
         [SerializeField] private Image size;
         [SerializeField] private Sprite micro, small, regular, large, other;
         [SerializeField] private Button expandDetailsButton;
+        [SerializeField] private List<RectTransform> scaledTransforms;
 
         private CanvasGroup _panel;
-        private RectTransform _transform;
         private bool _expanded = false;
         private float _defaultPanelHeight;
 
         void Start()
         {
             _panel = GetComponent<CanvasGroup>();
-            _transform = GetComponent<RectTransform>();
-            _defaultPanelHeight = _transform.rect.size.y;
+            _defaultPanelHeight = scaledTransforms[0].rect.size.y;
             expandDetailsButton.onClick.AddListener(ToggleExpand);
         }
 
         public void ToggleExpand()
         {
             _expanded ^= true;
-            var size = _transform.sizeDelta;
-            size.y = _expanded
-                ? Constants.cacheDetailsExpandedHeight
-                : _defaultPanelHeight;
-            _transform.sizeDelta = size;
+            foreach(var scaledTransform in scaledTransforms)
+            {
+                var size = scaledTransform.sizeDelta;
+                size.y = _expanded
+                    ? Constants.cacheDetailsExpandedHeight
+                    : _defaultPanelHeight;
+                    scaledTransform.sizeDelta = size;
+            }
         }
 
         public void HideCacheDetails()
