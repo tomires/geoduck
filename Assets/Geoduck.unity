@@ -1325,9 +1325,9 @@ MonoBehaviour:
           Modified: 
           UserName: 
       rasterOptions:
-        useRetina: 0
+        useRetina: 1
         useCompression: 0
-        useMipMap: 0
+        useMipMap: 1
   _terrain:
     _layerProperty:
       sourceType: 0
