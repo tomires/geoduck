@@ -38,6 +38,7 @@ namespace Geoduck
             int i = 0;
             foreach(var path in gpxList)
             {
+                Debug.Log(path);
                 var gpx = Utils.LoadGpxByPath(path);
                 _coordinates[i] = gpx.Coordinates;
                 var pin = Instantiate(pinPrefab);

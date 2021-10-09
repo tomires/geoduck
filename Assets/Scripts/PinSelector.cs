@@ -24,8 +24,8 @@ namespace Geoduck
 
         private void HighlightPin()
         {
-            FindObjectsOfType<Pin>().ToList().ForEach(p => p.SetColor(false));
-            SelectedPin.SetColor(true);
+            FindObjectsOfType<Pin>().ToList().ForEach(p => p.SetIcon(false));
+            SelectedPin.SetIcon(true);
         }
     }
 }
