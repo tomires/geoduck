@@ -11,6 +11,9 @@ namespace Geoduck
     public class PinSpawner : MonoSingleton<PinSpawner>
     {
         [SerializeField] private GameObject pinPrefab;
+        
+        public int PinCount => _spawnedPins.Count;
+
         private List<GameObject> _spawnedPins = new List<GameObject>();
         private Vector2d[] _coordinates;
         private AbstractMap _map;

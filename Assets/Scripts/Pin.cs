@@ -21,6 +21,7 @@ namespace Geoduck
         public void SetIcon(bool selected)
         {
             renderer.sprite = IconLibrary.Instance.GetIcon(_gpx);
+            renderer.sortingOrder = PinSpawner.Instance.PinCount;
         }
     }
 }
