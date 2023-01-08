@@ -15,20 +15,23 @@ namespace Geoduck
         [SerializeField] private Image size;
         [SerializeField] private Sprite micro, small, regular, large, other;
         [SerializeField] private Button expandDetailsButton;
+        [SerializeField] private Button logStatusButton;
         [SerializeField] private List<RectTransform> scaledTransforms;
 
         private CanvasGroup _panel;
         private bool _expanded = false;
         private float _defaultPanelHeight;
+        private GpxStructure _selectedCache;
 
         void Start()
         {
             _panel = GetComponent<CanvasGroup>();
             _defaultPanelHeight = scaledTransforms[0].rect.size.y;
             expandDetailsButton.onClick.AddListener(ToggleExpand);
+            logStatusButton.onClick.AddListener(ChangeLogStatus);
         }
 
-        public void ToggleExpand()
+        private void ToggleExpand()
         {
             _expanded ^= true;
             foreach(var scaledTransform in scaledTransforms)
@@ -41,6 +44,20 @@ namespace Geoduck
             }
         }
 
+        private void ChangeLogStatus()
+        {
+            var status = LogHistory.GetLogStatus(_selectedCache);
+            var newStatus = status switch
+            {
+                LogStatus.None => LogStatus.Found,
+                LogStatus.Found => LogStatus.NotFound,
+                _ => LogStatus.None
+            };
+            LogHistory.SetLogStatus(_selectedCache, newStatus);
+            PinSpawner.Instance.RefreshPin(_selectedCache);
+            typeIcon.sprite = IconLibrary.Instance.GetIcon(_selectedCache);
+        }
+
         public void HideCacheDetails()
         {
             _panel.interactable = false;
@@ -50,6 +67,7 @@ namespace Geoduck
 
         public void ShowCacheDetails(GpxStructure cache)
         {
+            _selectedCache = cache;
             _panel.interactable = true;
             _panel.blocksRaycasts = true;
             _panel.alpha = 1f;

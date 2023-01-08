@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 266171010}
   - component: {fileID: 266171012}
   - component: {fileID: 266171011}
+  - component: {fileID: 266171013}
   m_Layer: 5
   m_Name: NameBackground
   m_TagString: Untagged
@@ -491,6 +492,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266171009}
   m_CullTransparentMesh: 1
+--- !u!114 &266171013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266171009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 266171011}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &357056839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,7 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d4a5bc6dbc0dc41a68e5a8131afdd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinPrefab: {fileID: 7060495289144568334, guid: dcbe0c87ede6d98478d5cd64488b56bc, type: 3}
+  pinPrefab: {fileID: 6663404278461332212, guid: dcbe0c87ede6d98478d5cd64488b56bc, type: 3}
 --- !u!114 &1102290164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,6 +1544,8 @@ MonoBehaviour:
   traditional: {fileID: 21300000, guid: 1cc0ad59cc21f4a79921bfc1ebb5613c, type: 3}
   multi: {fileID: 21300000, guid: 1cf43b140ad574468839fc9dbc1fc329, type: 3}
   mystery: {fileID: 21300000, guid: c00c946fb7d114eeca0f10f76b18cbe2, type: 3}
+  found: {fileID: 21300000, guid: 39d09f2cbabb24950ae0fefbe9edc187, type: 3}
+  notFound: {fileID: 21300000, guid: 9f7e4dedb6e8747e599c30c0d018bb01, type: 3}
 --- !u!1 &1104718550
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,7 +2067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2108,6 +2155,7 @@ MonoBehaviour:
   large: {fileID: 21300000, guid: 011bf6b6f99d944458d11e2963b08c5d, type: 3}
   other: {fileID: 21300000, guid: 8fabaa9b03b806a41a4ca7a7b4557983, type: 3}
   expandDetailsButton: {fileID: 1115155638}
+  logStatusButton: {fileID: 266171013}
   scaledTransforms:
   - {fileID: 1519155114}
   - {fileID: 1702920508}

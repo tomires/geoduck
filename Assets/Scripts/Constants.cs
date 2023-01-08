@@ -10,6 +10,7 @@ namespace Geoduck
         public static readonly string logbook = $"{Application.persistentDataPath}/logbook.json";
         public static readonly string cacheDirectory = $"{Application.persistentDataPath}/caches";
         public static readonly string tempDirectory = $"{Application.persistentDataPath}/temp";
+        public static readonly string logFile = $"{Application.persistentDataPath}/log";
         public static string CacheFile(string gcCode) => string.Format(cacheDirectory + "/{0}.gpx", gcCode);
 
         public static class CacheTypes

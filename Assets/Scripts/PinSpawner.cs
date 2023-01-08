@@ -10,11 +10,12 @@ namespace Geoduck
     [RequireComponent(typeof(AbstractMap))]
     public class PinSpawner : MonoSingleton<PinSpawner>
     {
-        [SerializeField] private GameObject pinPrefab;
+        [SerializeField] private Pin pinPrefab;
         
         public int PinCount => _spawnedPins.Count;
 
-        private List<GameObject> _spawnedPins = new List<GameObject>();
+        private Dictionary<GpxStructure, Pin> _spawnedPins
+            = new Dictionary<GpxStructure, Pin>();
         private Vector2d[] _coordinates;
         private AbstractMap _map;
 
@@ -27,15 +28,20 @@ namespace Geoduck
         public void RefreshPins()
         {
             foreach (var pin in _spawnedPins)
-                Destroy(pin);
+                Destroy(pin.Value.gameObject);
+            _spawnedPins.Clear();
             StartCoroutine(SpawnPins());
+        }
+
+        public void RefreshPin(GpxStructure gpx)
+        {
+            _spawnedPins[gpx].SetIcon(true);
         }
 
         private IEnumerator SpawnPins()
         {
             Directory.CreateDirectory(Constants.cacheDirectory);
             var gpxList = Directory.GetFiles(Constants.cacheDirectory);
-            _spawnedPins = new List<GameObject>();
             _coordinates = new Vector2d[gpxList.Length];
 
             int i = 0;
@@ -45,8 +51,8 @@ namespace Geoduck
                 _coordinates[i] = gpx.Coordinates;
                 var pin = Instantiate(pinPrefab);
                 pin.transform.localPosition = _map.GeoToWorldPosition(_coordinates[i], true);
-                pin.GetComponent<Pin>().Gpx = gpx;
-                _spawnedPins.Add(pin);
+                pin.Gpx = gpx;
+                _spawnedPins.Add(gpx, pin);
                 yield return null;
                 i++;
             }
@@ -54,13 +60,8 @@ namespace Geoduck
 
         private void Update()
         {
-            int count = _spawnedPins.Count;
-            for (int i = 0; i < count; i++)
-            {
-                var spawnedPin = _spawnedPins[i];
-                var coordinate = _coordinates[i];
-                spawnedPin.transform.localPosition = _map.GeoToWorldPosition(coordinate, true);
-            }
+            foreach (var pin in _spawnedPins)
+                pin.Value.transform.localPosition = _map.GeoToWorldPosition(pin.Key.Coordinates, true);
         }
     }
 }
