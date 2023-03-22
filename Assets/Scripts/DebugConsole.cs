@@ -6,7 +6,7 @@ public class DebugConsole : MonoBehaviour
 {
     private Text text;
 
-    void Start()
+    void Awake()
     {
         text = GetComponent<Text>();
         text.text = "";
