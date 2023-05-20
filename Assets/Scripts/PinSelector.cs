@@ -19,7 +19,7 @@ namespace Geoduck
                     && Physics.Raycast(ray, out hit, int.MaxValue, LayerMask.GetMask("Pin")))
                 {
                     SelectedPin = hit.transform.GetComponent<Pin>();
-                    CacheDetailsPanel.Instance.ShowCacheDetails(SelectedPin.Gpx);
+                    CacheDetailsView.Instance.ShowCacheDetails(SelectedPin.Gpx);
                     HighlightPin();
                 }
             }

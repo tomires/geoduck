@@ -20,6 +20,12 @@ namespace Geoduck
             public const string multi = "Multi-cache";
         }
 
+        public static class Colors
+        {
+            public static readonly Color dotInactive = Color.gray;
+            public static readonly Color dotActive = Color.white;
+        }
+
         public static readonly float locationUpdateFrequency = 1f;
         public static readonly float cacheDetailsExpandedHeight = 500f;
     }

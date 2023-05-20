@@ -4,29 +4,25 @@ using UnityEngine.UI;
 
 namespace Geoduck
 {
-    [RequireComponent(typeof(CanvasGroup))]
-    public class CacheDetailsPanel : MonoSingleton<CacheDetailsPanel>
+    public class CacheDetailsView : MonoSingleton<CacheDetailsView>
     {
+        [SerializeField] private LayoutElement panel;
         [SerializeField] private Text cacheName;
         [SerializeField] private Image typeIcon;
         [SerializeField] private Text hint;
-        [SerializeField] private Text difficulty;
-        [SerializeField] private Text terrain;
-        [SerializeField] private Image size;
-        [SerializeField] private Sprite micro, small, regular, large, other;
+        [SerializeField] private List<Image> difficultyDots;
+        [SerializeField] private List<Image> terrainDots;
+        [SerializeField] private List<Image> sizeDots;
         [SerializeField] private Button expandDetailsButton;
         [SerializeField] private Button logStatusButton;
-        [SerializeField] private List<RectTransform> scaledTransforms;
 
-        private CanvasGroup _panel;
         private bool _expanded = false;
         private float _defaultPanelHeight;
         private GpxStructure _selectedCache;
 
         void Start()
         {
-            _panel = GetComponent<CanvasGroup>();
-            _defaultPanelHeight = scaledTransforms[0].rect.size.y;
+            _defaultPanelHeight = panel.preferredHeight;
             expandDetailsButton.onClick.AddListener(ToggleExpand);
             logStatusButton.onClick.AddListener(ChangeLogStatus);
         }
@@ -34,14 +30,9 @@ namespace Geoduck
         private void ToggleExpand()
         {
             _expanded ^= true;
-            foreach(var scaledTransform in scaledTransforms)
-            {
-                var size = scaledTransform.sizeDelta;
-                size.y = _expanded
-                    ? Constants.cacheDetailsExpandedHeight
-                    : _defaultPanelHeight;
-                    scaledTransform.sizeDelta = size;
-            }
+            panel.preferredHeight = _expanded
+                ? Constants.cacheDetailsExpandedHeight
+                : _defaultPanelHeight;
         }
 
         private void ChangeLogStatus()
@@ -60,31 +51,35 @@ namespace Geoduck
 
         public void HideCacheDetails()
         {
-            _panel.interactable = false;
-            _panel.blocksRaycasts = false;
-            _panel.alpha = 0f;
+            panel.gameObject.SetActive(false);
         }
 
         public void ShowCacheDetails(GpxStructure cache)
         {
             _selectedCache = cache;
-            _panel.interactable = true;
-            _panel.blocksRaycasts = true;
-            _panel.alpha = 1f;
+            panel.gameObject.SetActive(true);
+
+            difficultyDots.ForEach(dot => dot.color = Constants.Colors.dotInactive);
+            terrainDots.ForEach(dot => dot.color = Constants.Colors.dotInactive);
+            sizeDots.ForEach(dot => dot.color = Constants.Colors.dotInactive);
 
             cacheName.text = cache.wpt.details.name;
             typeIcon.sprite = IconLibrary.Instance.GetIcon(cache);
             hint.text = cache.wpt.details.hint;
-            difficulty.text = cache.wpt.details.difficulty.ToString("0.0");
-            terrain.text = cache.wpt.details.terrain.ToString("0.0");
-            size.sprite = cache.wpt.details.container switch
+            for (int d = 0; d < cache.wpt.details.difficulty; d++)
+                difficultyDots[d].color = Constants.Colors.dotActive;
+            for (int t = 0; t < cache.wpt.details.terrain; t++)
+                terrainDots[t].color = Constants.Colors.dotActive;
+            var size = cache.wpt.details.container switch
             {
-                "Micro" => micro,
-                "Small" => small,
-                "Regular" => regular,
-                "Large" => large,
-                _ => other
+                "Micro" => 1,
+                "Small" => 2,
+                "Regular" => 3,
+                "Large" => 4,
+                _ => 0
             };
+            for (int s = 0; s < size; s++)
+                sizeDots[s].color = Constants.Colors.dotActive;
         }
     }
 }

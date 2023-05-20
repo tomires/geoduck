@@ -5,17 +5,15 @@ using UnityEngine;
 
 namespace Geoduck
 {
-    [RequireComponent(typeof(Renderer))]
     public class LocationDot : MonoSingleton<LocationDot>
     {
         public Vector2d CurrentLocation { get; private set; }
-        [SerializeField] private AbstractMap _map;
-        private Renderer _renderer;
+        [SerializeField] private GameObject graphic;
+        [SerializeField] private AbstractMap map;
 
         IEnumerator Start()
         {
-            _renderer = GetComponent<Renderer>();
-            _renderer.enabled = false;
+            graphic.SetActive(false);
 
             Input.location.Start();
 
@@ -24,7 +22,7 @@ namespace Geoduck
 
             if (Input.location.status == LocationServiceStatus.Running)
             {
-                _renderer.enabled = true;
+                graphic.SetActive(true);
                 CenterMapOnLocation();
                 StartCoroutine(UpdateLocation());
             }
@@ -32,13 +30,13 @@ namespace Geoduck
 
         void Update()
         {
-            transform.position = _map.GeoToWorldPosition(CurrentLocation);
+            transform.position = map.GeoToWorldPosition(CurrentLocation);
         }
 
         public void CenterMapOnLocation()
         {
-            _map.SetCenterLatitudeLongitude(GetLocation());
-            _map.UpdateMap();
+            map.SetCenterLatitudeLongitude(GetLocation());
+            map.UpdateMap();
         }
 
         private IEnumerator UpdateLocation()
