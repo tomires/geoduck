@@ -4742,6 +4742,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3614480072400317128, guid: 58f00dfaa14a46b49b48a74180508ec2, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3614480072400317129, guid: 58f00dfaa14a46b49b48a74180508ec2, type: 3}
       propertyPath: m_Name
       value: ProximityLine
